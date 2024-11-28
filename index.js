@@ -1,10 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 const url = 'mongodb+srv://abhishekmishra342001:Abhi2001@abhishek.9kvuy.mongodb.net/?retryWrites=true&w=majority&appName=Abhishek'
 
 const app = express();
-app.use(express.json());
+
 
 mongoose.connect(url)
 .then(()=>{
@@ -13,14 +14,17 @@ mongoose.connect(url)
 .catch((error)=>{
     console.log(error)
 })
+app.use(express.json());
 
 // route
 
-app.post('/apitest', (req,res)=>{
+
+
+app.post('/apitest', multer().none(), async(req,res)=>{
     try{
-        let data = req.body;
-        console.log(data)
-        res.status(200).json({massege:'sucess api test ...', data})
+       let data = await req.body;
+       console.log(data)
+        res.status(200).json({massege:'sucess api test ...'})
     }
     catch(error){
             res.status(500).json({massgeg:error})
