@@ -24,7 +24,7 @@ app.post('/apitest', multer().none(), async(req,res)=>{
     try{
        let data = await req.body;
        console.log(data)
-        res.status(200).json({massege:'sucess api test ...'})
+        res.status(200).json({massege:'sucess api test ...' , data})
     }
     catch(error){
             res.status(500).json({massgeg:error})
